@@ -1,0 +1,58 @@
+TECH UTILIZADAS
+
+- REACT
+- TAILWIND CSS
+- APOLLO
+- GRAPHQL
+- GRAPHCMS
+
+body {
+    /*@apply - aplica classes, conceito do post css*/
+    @apply bg-zinc-900 text-zinc-100;
+  }
+  
+ 
+GraphCMS para criar o admin, pois ele é Headless e libera os endpoints para consumirmos com o react já o WP não é Headless
+Headless CMS: Painel de ADMIN (dados fornecidos através de uma API REST ou GraphQL)
+  
+   query - buscar dados
+   mutation - criar, alterar, ou deleta dados na API
+  
+  
+o uso do graphql ajuda para:
+overfatching  - quando o backend retorna muito mais informações pro front nem necessidade.
+underfatching - quando o backend não retorna todas as info para o front
+
+
+- para chamar a api do graphcms utiliza-se o apolo.
+
+OBS: NÃO se utiliza fetch, xmlhttprequest, axios ou outro para fazer requisições pq a query ficaria estranha.
+ex:
+
+function App() {
+  useEffect(() => {
+    fetch('https://api-sa-east-1.graphcms.com/v2/cl4orrxnk0ti401ywet526fd4/master', {
+      method: 'POST',
+      body: `query {
+
+      }`
+    })
+
+  }
+
+}
+
+note que dentro do body ficaria esquisito e mais complexo, não teria sintaxe highlight.
+
+O uso do Apollo fica melhor pois traz mais recursos como:
+- controle de cache 
+  ex: se tiver 2 requisições iguais na API, o APOLO identifica que já foi realizada uma requisição antes então retorna os mesmos dados  
+  para não repetir a mesma requisição.
+
+
+
+ gql - permite escrever query ou mutation do graphql tendo a sintaxe hightlight. fica melhor a leitura
+
+ useQuery - hook do react para adicionar um comportamento ao um componente. geralemnte um hook começa com o pre-fixo use..
+
+
