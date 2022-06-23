@@ -56,3 +56,56 @@ O uso do Apollo fica melhor pois traz mais recursos como:
  useQuery - hook do react para adicionar um comportamento ao um componente. geralemnte um hook começa com o pre-fixo use..
 
 
+EXEMPLO PARA CONSUMIR UMA API EXTERNA COM REACT + GRAPHQL
+
+
+
+import { gql, useQuery } from "@apollo/client"
+import { useEffect } from "react"
+
+
+const GET_LESSONS_QUERY = gql`
+  query {
+    lessons {
+      id
+      title
+    }
+  }
+`
+// tipando o objeto lesson
+interface Lesson {
+  id: string;
+  title: string;
+}
+
+// dentro do data tem o objeto lesson em seguida o array de lesson
+// <{ lessons: Lesson[] }>
+function App() {
+
+  const { data } = useQuery<{ lessons: Lesson[] }>(GET_LESSONS_QUERY)
+
+  // caso a entidade lesson da query não exista o data vai retornar undefined ai vai dar erro, então é preciso adicionar o ?
+  return (
+    <ul>
+      {data?.lessons.map(lesson => {
+        return <li key={lesson.id}>{lesson.title}</li>
+      })}
+    </ul>
+  )
+   
+}
+export default App
+
+
+-------------------------------------------------------------------
+UTILIZANDO SVG NO REACT 
+
+Utiliza esse site para converter o codigo svg em um componente 
+https://svg2jsx.com/
+
+Utilizando icones
+phosphoricons.com
+
+
+https://evento.rocketseat.com.br/ignite-lab/episodios/react/aula-2/edicao/1
+50:00  min
